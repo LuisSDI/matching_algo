@@ -53,7 +53,8 @@ roomPref = []
 
 for doc in docs:
     uid = doc.to_dict().get('uid')
-    personality = perso_ref.document(uid).get('personality')
+    personalityDoc = perso_ref.document(uid).get()
+    personality = personalityDoc.to_dict().get('personality')
     allRoommates.append(RoommateIndividual(counter, doc.to_dict().get('uid'), beliefAns=doc.to_dict().get('beliefAns'),
    communAns= doc.to_dict().get('communAns'),
    habitsAns= doc.to_dict().get('habitsAns'), interestAns= doc.to_dict().get('interestAns'), 
@@ -61,7 +62,7 @@ for doc in docs:
     personality = personality))
     counter+=1
 
-for x in range(counter,6):
+for x in range(counter,8):
     uid = generateUid(28)
     allRoommates.append(generateUser(x,uid))
     #print(allRoommates[x-1])
@@ -71,9 +72,6 @@ roomPref = [[] for i in range(len(allRoommates))]
 pairs=list(itertools.combinations(allRoommates, 2))
 
 for o in pairs:
-    print(o[0].id)
-    print(o[1].id)
-    print('MATCH')
     a = o[0]
     b = o[1]
     print(a.id)
