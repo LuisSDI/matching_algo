@@ -30,7 +30,8 @@ beliefAns = ${self.beliefAns},
 communAns ={self.communAns}, 
 habitsAns ={self.habitsAns}, 
 interestAns ={self.interestAns}, 
-socialAns ={self.socialAns},)'''
+socialAns ={self.socialAns},
+personality = {self.personality})'''
         )
 
     def __str__(self):
@@ -43,11 +44,14 @@ habitsAns ={self.habitsAns},
 interestAns ={self.interestAns}, 
 socialAns ={self.socialAns},
 personality = {self.personality})'''
+#             f'''RoommateIndividual( id= {self.id}, 
+# uid= {self.uid}, 
+# personality = {self.personality})'''
         )
         
 class RoommatePreference(object):
     def __init__(self, roomid, roomuid, beliefScore = 0 ,communScore=0, habitsScore=0, interestScore=0,
-                 socialScore=0, finalScore=0):
+                 socialScore=0, personalityScore = 0, finalScore=0):
         self.roomid = roomid
         self.roomuid = roomuid
         self.beliefScore = beliefScore 
@@ -55,11 +59,12 @@ class RoommatePreference(object):
         self.habitsScore = habitsScore
         self.interestScore = interestScore
         self.socialScore = socialScore
+        self.personalityScore = personalityScore
         self.finalScore = finalScore
 
 
     def getFinal(self):
-        self.finalScore = (self.habitsScore*30) + (self.socialScore*10) + (self.beliefScore*5) + (self.communScore*5) + (self.interestScore*20)
+        self.finalScore = (self.habitsScore*30) + (self.socialScore*10) + (self.beliefScore*5) + (self.communScore*5) + (self.interestScore*20) + (self.personalityScore *30)
         return self.finalScore
 
     def __repr__(self):
