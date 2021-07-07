@@ -8,6 +8,20 @@ from roommate_answers import RoommateIndividual, RoommatePreference
 import numpy as np
 from irving_algorithm import Find_all_Irving_partner
 import random
+import pyrebase
+from getpass import getpass
+
+
+firebaseConfig = {
+    'apiKey': "AIzaSyAdEg1yANVI8CVuE9Z3HYMiFXHPRBTRIi4",
+    'authDomain': "matched--official.firebaseapp.com",
+    'projectId': "matched--official",
+    'storageBucket': "matched--official.appspot.com",
+    'messagingSenderId': "383125817338",
+    'databaseURL': "xxxxxx",
+    'appId': "1:383125817338:web:8953ee2e21ec01a6cc4643",
+    'measurementId': "G-VZHZKBBYCL"
+  }
 
 habitsNumAns = [4,4,3,4,3
 ,4,4,4,4,2,
@@ -144,6 +158,16 @@ def combineRoom(partnerslist,roomates):
 
 cred = credentials.Certificate("matched--official-firebase-adminsdk-agzne-ef087005af.json")
 default_app= firebase_admin.initialize_app(cred)
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth =  firebase.auth()
+
+email = input('Please enter the admin email: ')
+password = getpass('Please enter the passport: ')
+
+user = auth.sign_in_with_email_and_password(email,password)
+print('Success: User Sign In')
+
 
 print(default_app.name)
 
