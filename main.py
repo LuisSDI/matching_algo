@@ -10,6 +10,7 @@ from irving_algorithm import Find_all_Irving_partner
 import random
 import pyrebase
 from getpass import getpass
+from scipy.spatial import distance
 
 
 firebaseConfig = {
@@ -35,10 +36,18 @@ def getPoints(ans1, ans2, numAns):
 def calculateHabits(myHabits , roomHabits):
     
     habitsScore = 0
-
+    max = [x -1 for x in habitsNumAns]
+    min = [0 for x in habitsNumAns]
+    maxDistance = distance.euclidean(max,min)
+    print('Max Distance Habits')
+    print(maxDistance)
+    realDistance = distance.euclidean(myHabits,roomHabits)
+    print('Real Distance Habits')
+    print(realDistance)
     for x in range(len(myHabits)):
         habitsScore+=getPoints(myHabits[x],roomHabits[x], habitsNumAns[x])
-    habitsScore = habitsScore / len(myHabits)
+    #habitsScore = habitsScore / len(myHabits)
+    habitsScore = 1 - (realDistance/maxDistance)
     #print(habitsScore)
     return habitsScore
 
@@ -46,9 +55,19 @@ def calculateOther(myScore, roomScore):
     myScore = [x+1 for x in myScore]
     roomScore = [x+1 for x in roomScore]
     result = 0
+    max = [4 for x in myScore]
+    min = [0 for x in myScore]
+    maxDistance = distance.euclidean(max,min)
+    print('Max Distance Others')
+    print(maxDistance)
+    realDistance = distance.euclidean(myScore,roomScore)
+    print('Real Distance Others')
+    print(realDistance)
+    
     for x in range(len(myScore)):
         result +=getPoints(myScore[x],roomScore[x], 5)
-    result = result / len(myScore)
+    #result = result / len(myScore)
+    result = 1 - (realDistance/maxDistance)
     return result
 
 
@@ -205,6 +224,9 @@ if missing != 4:
         allRoommates.append(generateUser(x,uid))
     
 roomPref = getPreferences(allRoommates)
+
+for roomPair in roomPref:
+    print(roomPair)
 
 prefMatrix = generateMatrix(allRoommates,roomPref)
 
