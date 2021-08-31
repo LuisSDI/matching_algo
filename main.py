@@ -12,6 +12,7 @@ import pyrebase
 from getpass import getpass
 from scipy.spatial import distance
 
+#Algorithm use in the Matched App  
 
 firebaseConfig = {
     'apiKey': "AIzaSyAdEg1yANVI8CVuE9Z3HYMiFXHPRBTRIi4",
